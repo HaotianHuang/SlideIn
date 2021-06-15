@@ -28,9 +28,25 @@ struct Home: View {
     // Auto updating TextBox Height...
     @State var containerHeight: CGFloat = 0
     
+    @State private var array = ["Don't go through the front door", "Make sure you are nice", "Heck Yes"]
+
+      @State private var num = 0
+    
     var body: some View {
         NavigationView{
-            VStack {
+            VStack(spacing: 5) {
+                
+                Button("Get Inspo 🥺"){
+                    let newNum = Int.random(in: 0..<array.count)
+                    if newNum != num {
+                        num = newNum
+                    }
+                    if newNum == num {
+                        num = Int.random(in: 0..<array.count)
+                    }
+                }
+                
+                Text(array[num])
                 
                 AutoSizingTF(hint: "Enter Message", text: $text, containerHeight: $containerHeight, onEnd: {
                     
@@ -48,7 +64,7 @@ struct Home: View {
                 
                     
             }
-            .navigationTitle("Input Accessory View")
+
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.primary.opacity(0.04).ignoresSafeArea())
         }
