@@ -84,6 +84,7 @@ struct Home: View {
         NavigationView{
             VStack(spacing: 5) {
                 Text("Shake for wisdom 🥺")
+                    .foregroundColor(.blue)
                     .bold()
                     .onShake {
                         let luckyChoice = Int.random(in: 0...1)
