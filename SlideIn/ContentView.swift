@@ -28,7 +28,10 @@ struct Home: View {
     // Auto updating TextBox Height...
     @State var containerHeight: CGFloat = 0
     
-    @State private var array = ["Don't go through the front door", "Make sure you are nice", "Heck Yes"]
+    @State private var array =
+        ["Remember they're receiving 10 messages like this every day.",
+         "Always offer value upfront, and value that they would likely appreciate.",
+         "Are you reaching out with intent to give or to receive?"]
 
       @State private var num = 0
     
@@ -36,7 +39,7 @@ struct Home: View {
         NavigationView{
             VStack(spacing: 5) {
                 
-                Button("Get Inspo 🥺"){
+                Button("Shake for wisdom 🥺"){
                     let newNum = Int.random(in: 0..<array.count)
                     if newNum != num {
                         num = newNum
@@ -47,6 +50,7 @@ struct Home: View {
                 }
                 
                 Text(array[num])
+                    .padding(.horizontal)
                 
                 AutoSizingTF(hint: "Enter Message", text: $text, containerHeight: $containerHeight, onEnd: {
                     
@@ -156,6 +160,7 @@ class Coordinator: NSObject, UITextViewDelegate{
     func textViewDidChange(_ textView: UITextView) {
         parent.text = textView.text
         parent.containerHeight = textView.contentSize.height
+        
     }
     
     // On End checking if textbox is empty
