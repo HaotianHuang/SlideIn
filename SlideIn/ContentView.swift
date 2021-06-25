@@ -20,6 +20,47 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
+// MARK: .onShake Creation
+
+// The notification we'll send when a shake gesture happens.
+extension UIDevice {
+    static let deviceDidShakeNotification = Notification.Name(rawValue: "deviceDidShakeNotification")
+}
+
+//  Override the default behavior of shake gestures to send our notification instead.
+extension UIWindow {
+    open override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            NotificationCenter.default.post(name: UIDevice.deviceDidShakeNotification, object: nil)
+        }
+    }
+}
+
+// A view modifier that detects shaking and calls a function of our choosing.
+struct DeviceShakeViewModifier: ViewModifier {
+    let action: () -> Void
+    
+    func body(content: Content) -> some View {
+        content
+            .onAppear()
+            .onReceive(NotificationCenter.default.publisher(for: UIDevice.deviceDidShakeNotification)) { _ in
+                action()
+            }
+    }
+}
+
+// A View extension to make the modifier easier to use.
+extension View {
+    func onShake(perform action: @escaping () -> Void) -> some View {
+        self.modifier(DeviceShakeViewModifier(action: action))
+    }
+}
+
+// An example view that responds to being shaken
+
+
+// MARK: Create resizeable text box
+
 struct Home: View {
     
     @State var text = ""
@@ -31,57 +72,74 @@ struct Home: View {
     @State private var array =
         ["Remember they're receiving 10 messages like this every day.",
          "Always offer value upfront, and value that they would likely appreciate.",
-         "Are you reaching out with intent to give or to receive?", "Why are you being so needy. Figure it out yourself."]
-
-      @State private var num = 0
+         "Are you reaching out with intent to give or to receive?", "Why are you being so needy. Figure it out yourself.", "Can you be more specific?🤔❗", "Will you actually use their help? Or, do you need to work on your portfolio?", "🧠...CEOs and senior executives hate this question. They say it’s self-serving, wastes time, and isn’t reciprocal 😡" ]
     
-    @State var coolArray = ["hello"]
+    @State private var num = 0
     
+    @State var coolArray = ["..."]
+    
+    
+    // MARK: CONTENT VIEW
     var body: some View {
         NavigationView{
             VStack(spacing: 5) {
-                
-                
-                
-                Button("Shake for wisdom 🥺"){
-                    let newNum = Int.random(in: 0..<array.count)
-                    if newNum != num {
-                        num = newNum
-                    }
-                    if newNum == num {
-                        num = Int.random(in: 0..<array.count)
-                    }
-                    coolArray = text.components(separatedBy: " ")
-                    for index in 0..<coolArray.count {
-                        if coolArray[index].lowercased() == "please"
-                        {
-                            num = 3
+                Text("Shake for wisdom 🥺")
+                    .bold()
+                    .onShake {
+                        let luckyChoice = Int.random(in: 0...1)
+                        if luckyChoice == 0 {
+                            let newNum = Int.random(in: 0..<array.count)
+                            if newNum != num {
+                                num = newNum
+                            }
+                            if newNum == num {
+                                num = Int.random(in: 0..<array.count)
+                            }
+                        }
+                        if luckyChoice == 1{
+                            coolArray = text.components(separatedBy: " ")
+                            for index in 0..<coolArray.count {
+                                if coolArray[index].lowercased() == "please" {
+                                    num = 3
+                                }
+                                if coolArray[index].lowercased() == "tips" {
+                                    num = 4
+                                }
+                                if coolArray[index].lowercased() == "help" {
+                                    num = 5
+                                }
+                                if coolArray[index].lowercased() == "brains" || coolArray[index].lowercased() == "brain"{
+                                    num = 6
+                                }
+                                
+                            }
                         }
                     }
-                }
-                
-                Text(coolArray[0])
                 
                 Text(array[num])
                     .padding(.horizontal)
+                //.fixedSize(horizontal: false, vertical: true)
+                
+                //Text(array[num])
+                //.padding(.horizontal)
                 
                 AutoSizingTF(hint: "Enter Message", text: $text, containerHeight: $containerHeight, onEnd: {
                     
                     // Do when keyboard closes...
                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                 })
-                    .padding(.horizontal)
-                    
-                    // Your Max height here ...
-                    
-                    .frame(height: containerHeight <= 200 ? containerHeight : 200)
-                    .background(Color.white)
-                    .cornerRadius(10)
-                    .padding()
+                //.padding(.horizontal)
                 
-                    
+                // Your Max height here ...
+                
+                .frame(height: containerHeight <= 200 ? containerHeight : 200)
+                //.background(Color.white)
+                .cornerRadius(10)
+                .padding()
+                
+                
             }
-
+            
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.primary.opacity(0.04).ignoresSafeArea())
         }
@@ -131,7 +189,7 @@ struct AutoSizingTF: UIViewRepresentable {
         textView.inputAccessoryView = toolBar
         
         return textView
-
+        
     }
     
     func updateUIView(_ uiView: UITextView, context: Context) {
@@ -156,7 +214,7 @@ class Coordinator: NSObject, UITextViewDelegate{
     
     // keyBoard Close @objc Function...
     @objc func closeKeyBoard(){
-     
+        
         parent.onEnd()
     }
     
