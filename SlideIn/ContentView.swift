@@ -31,13 +31,17 @@ struct Home: View {
     @State private var array =
         ["Remember they're receiving 10 messages like this every day.",
          "Always offer value upfront, and value that they would likely appreciate.",
-         "Are you reaching out with intent to give or to receive?"]
+         "Are you reaching out with intent to give or to receive?", "Why are you being so needy. Figure it out yourself."]
 
       @State private var num = 0
+    
+    @State var coolArray = ["hello"]
     
     var body: some View {
         NavigationView{
             VStack(spacing: 5) {
+                
+                
                 
                 Button("Shake for wisdom 🥺"){
                     let newNum = Int.random(in: 0..<array.count)
@@ -47,7 +51,16 @@ struct Home: View {
                     if newNum == num {
                         num = Int.random(in: 0..<array.count)
                     }
+                    coolArray = text.components(separatedBy: " ")
+                    for index in 0..<coolArray.count {
+                        if coolArray[index].lowercased() == "please"
+                        {
+                            num = 3
+                        }
+                    }
                 }
+                
+                Text(coolArray[0])
                 
                 Text(array[num])
                     .padding(.horizontal)
@@ -173,3 +186,4 @@ class Coordinator: NSObject, UITextViewDelegate{
     }
     
 }
+
