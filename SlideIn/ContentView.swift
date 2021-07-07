@@ -70,19 +70,30 @@ struct Home: View {
     @State var containerHeight: CGFloat = 0
     
     @State private var array =
-        ["Remember they're receiving 10 messages like this every day.",
+        [
+        "Remember they're receiving 10 messages like this every day.",
          "Always offer value upfront, and value that they would likely appreciate.",
-         "Are you reaching out with intent to give or to receive?", "Why are you being so needy. Figure it out yourself.", "Can you be more specific?🤔❗",
-         "Will you actually use their help? Or, do you need to work on your portfolio?",
+         "Are you reaching out with intent to give or to receive?",
+        "“Reaching out” to a stranger should be a last resort not the first step.",
+        "Remember there is a growing divide between people who TALK and people who DO. Understand what your intention is.",
+            "Be wary of pushing responsibilities over to strangers.",
+            "Less shaking, more writing!",
+        // Above is general, below is specific
+        "Remember to respect them and to respect yourself.",
+         "Can you be more specific?🤔❗",
+         "Is this something you need their help with? Or can you figure it out on Google.",
          "🧠...CEOs and senior executives hate this question. They say it’s self-serving, wastes time, and isn’t reciprocal 😡",
          "They are almost everywhere! Now aren’t they?? Seek and thou shall find 🧐",
          "Knowledge is indeed everything, but with a little digging do you reckon you could find these elsewhere?⛏️👷",
          "Time is money, is it not? What do they really have to gain from providing you with guidance, what can you do to earn their time?? ⏰💰💸💰",
-         "No doubt you need it, but is there a better way of saying that ... I’m sure you’d be grateful for their help."]
+         "No doubt you need it, but is there a better way of saying that ... I’m sure you’d be grateful for their help."
+        ]
     
     @State private var num = 0
     
     @State var coolArray = ["..."]
+    
+    @State private var shakeCounter = 0
     
     
     // MARK: CONTENT VIEW
@@ -93,49 +104,54 @@ struct Home: View {
                     .foregroundColor(.blue)
                     .bold()
                     .onShake {
+                        shakeCounter += 1
                         let luckyChoice = Int.random(in: 0...1)
                         if luckyChoice == 0 {
-                            let newNum = Int.random(in: 0..<array.count)
+                            let newNum = Int.random(in: 0...5)
                             if newNum != num {
                                 num = newNum
                             }
                             if newNum == num {
-                                num = Int.random(in: 0..<array.count)
+                                num = Int.random(in: 0...5)
                             }
                         }
                         if luckyChoice == 1{
                             coolArray = text.components(separatedBy: " ")
                             for index in 0..<coolArray.count {
                                 if coolArray[index].lowercased() == "please" {
-                                    num = 3
-                                }
-                                if coolArray[index].lowercased() == "tips" {
-                                    num = 4
-                                }
-                                if coolArray[index].lowercased() == "help" {
-                                    num = 5
-                                }
-                                if coolArray[index].lowercased() == "brains" || coolArray[index].lowercased() == "brain"{
-                                    num = 6
-                                }
-                                if coolArray[index].lowercased() == "opportunity" {
                                     num = 7
                                 }
-                                if coolArray[index].lowercased() == "ask you" {
+                                if coolArray[index].lowercased() == "tips" {
                                     num = 8
                                 }
-                                if coolArray[index].lowercased() == "time" {
+                                if coolArray[index].lowercased() == "help" {
                                     num = 9
                                 }
-                                if coolArray[index].lowercased() == "need" {
+                                if coolArray[index].lowercased() == "brains" || coolArray[index].lowercased() == "brain"{
                                     num = 10
+                                }
+                                if coolArray[index].lowercased() == "opportunity" {
+                                    num = 11
+                                }
+                                if coolArray[index].lowercased() == "ask you" {
+                                    num = 12
+                                }
+                                if coolArray[index].lowercased() == "time" {
+                                    num = 13
+                                }
+                                if coolArray[index].lowercased() == "need" {
+                                    num = 14
                                 }
                                 
                             }
                         }
+                        if shakeCounter >= Int.random(in: 3...6) {
+                            num = 6
+                            shakeCounter = 0
+                        }
                     }
                 
-                Text(array[num])
+                Text(array[num] + " (\(String(shakeCounter)))")
                     .padding(.horizontal)
                 //.fixedSize(horizontal: false, vertical: true)
                 
