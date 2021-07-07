@@ -72,7 +72,13 @@ struct Home: View {
     @State private var array =
         ["Remember they're receiving 10 messages like this every day.",
          "Always offer value upfront, and value that they would likely appreciate.",
-         "Are you reaching out with intent to give or to receive?", "Why are you being so needy. Figure it out yourself.", "Can you be more specific?🤔❗", "Will you actually use their help? Or, do you need to work on your portfolio?", "🧠...CEOs and senior executives hate this question. They say it’s self-serving, wastes time, and isn’t reciprocal 😡" ]
+         "Are you reaching out with intent to give or to receive?", "Why are you being so needy. Figure it out yourself.", "Can you be more specific?🤔❗",
+         "Will you actually use their help? Or, do you need to work on your portfolio?",
+         "🧠...CEOs and senior executives hate this question. They say it’s self-serving, wastes time, and isn’t reciprocal 😡",
+         "They are almost everywhere! Now aren’t they?? Seek and thou shall find 🧐",
+         "Knowledge is indeed everything, but with a little digging do you reckon you could find these elsewhere?⛏️👷",
+         "Time is money, is it not? What do they really have to gain from providing you with guidance, what can you do to earn their time?? ⏰💰💸💰",
+         "No doubt you need it, but is there a better way of saying that ... I’m sure you’d be grateful for their help."]
     
     @State private var num = 0
     
@@ -111,6 +117,18 @@ struct Home: View {
                                 }
                                 if coolArray[index].lowercased() == "brains" || coolArray[index].lowercased() == "brain"{
                                     num = 6
+                                }
+                                if coolArray[index].lowercased() == "opportunity" {
+                                    num = 7
+                                }
+                                if coolArray[index].lowercased() == "ask you" {
+                                    num = 8
+                                }
+                                if coolArray[index].lowercased() == "time" {
+                                    num = 9
+                                }
+                                if coolArray[index].lowercased() == "need" {
+                                    num = 10
                                 }
                                 
                             }
