@@ -71,22 +71,24 @@ struct Home: View {
     
     @State private var array =
         [
-        "Remember they're receiving 10 messages like this every day.",
-         "Always offer value upfront, and value that they would likely appreciate.",
-         "Are you reaching out with intent to give or to receive?",
-        "“Reaching out” to a stranger should be a last resort not the first step.",
-        "Remember there is a growing divide between people who TALK and people who DO. Understand what your intention is.",
-            "Be wary of pushing responsibilities over to strangers.",
-            "Less shaking, more writing!",
-        // Above is general, below is specific
-        "Remember to respect them and to respect yourself.",
-         "Can you be more specific?🤔❗",
-         "Is this something you need their help with? Or can you figure it out on Google.",
-         "🧠...CEOs and senior executives hate this question. They say it’s self-serving, wastes time, and isn’t reciprocal 😡",
-         "They are almost everywhere! Now aren’t they?? Seek and thou shall find 🧐",
-         "Knowledge is indeed everything, but with a little digging do you reckon you could find these elsewhere?⛏️👷",
-         "Time is money, is it not? What do they really have to gain from providing you with guidance, what can you do to earn their time?? ⏰💰💸💰",
-         "No doubt you need it, but is there a better way of saying that ... I’m sure you’d be grateful for their help."
+            0: "Looking good!✨",
+            1: "Less shaking, more writing!",
+            // Above is general, below is specific
+            2: "Remember they're receiving 10 messages like this every day.",
+            3: "Always offer value upfront, and value that they would likely appreciate.",
+            4: "Are you reaching out with intent to give or to receive?",
+            5: "“Reaching out” to a stranger should be a last resort not the first step.",
+            6: "Remember there is a growing divide between people who TALK and people who DO. Understand what your intention is.",
+            7: "Be wary of pushing responsibilities over to strangers.",
+            8: "If you want to ask for something, make your intentions clear from the start.",
+            9: "Remember to respect them and to respect yourself.",
+            10: "Can you be more specific?🤔❗",
+            11: "Is this something you need their help with? Or can you figure it out on Google.",
+            12: "🧠...CEOs and senior executives hate this question. They say it’s self-serving, wastes time, and isn’t reciprocal 😡",
+            13: "They are almost everywhere! Now aren’t they?? Seek and thou shall find 🧐",
+            14: "Knowledge is indeed everything, but with a little digging do you reckon you could find these elsewhere?⛏️👷",
+            15: "Time is money, is it not? What do they really have to gain from providing you with guidance, what can you do to earn their time?? ⏰💰💸💰",
+            16: "No doubt you need it, but is there a better way of saying that ... I’m sure you’d be grateful for their help."
         ]
     
     @State private var num = 0
@@ -105,53 +107,74 @@ struct Home: View {
                     .bold()
                     .onShake {
                         shakeCounter += 1
-                        let luckyChoice = Int.random(in: 0...1)
+                        let luckyChoice = 1
                         if luckyChoice == 0 {
-                            let newNum = Int.random(in: 0...5)
-                            if newNum != num {
-                                num = newNum
-                            }
-                            if newNum == num {
-                                num = Int.random(in: 0...5)
-                            }
+                            //                            let newNum = Int.random(in: 0...6)
+                            //                            if newNum != num {
+                            //                                num = newNum
+                            //                            }
+                            //                            if newNum == num {
+                            //                                num = Int.random(in: 0...6)
+                            //                            }
                         }
                         if luckyChoice == 1{
                             coolArray = text.components(separatedBy: " ")
                             for index in 0..<coolArray.count {
-                                if coolArray[index].lowercased() == "please" {
+                                if coolArray[index].lowercased() == "hey" {
+                                    num = 2
+                                }
+                                if coolArray[index].lowercased() == "benefit" {
+                                    num = 3
+                                }
+                                if coolArray[index].lowercased() == "give" {
+                                    num = 4
+                                }
+                                if coolArray[index].lowercased() == "me" {
+                                    num = 5
+                                }
+                                if coolArray[index].lowercased() == "chance" {
+                                    num = 6
+                                }
+                                if coolArray[index].lowercased() == "want" {
                                     num = 7
                                 }
-                                if coolArray[index].lowercased() == "tips" {
+                                if coolArray[index].lowercased() == "also" {
                                     num = 8
                                 }
                                 if coolArray[index].lowercased() == "help" {
                                     num = 9
                                 }
-                                if coolArray[index].lowercased() == "brains" || coolArray[index].lowercased() == "brain"{
+                                if coolArray[index].lowercased() == "tips"{
                                     num = 10
                                 }
-                                if coolArray[index].lowercased() == "opportunity" {
+                                if coolArray[index].lowercased() == "could" {
                                     num = 11
                                 }
-                                if coolArray[index].lowercased() == "ask you" {
+                                if coolArray[index].lowercased() == "brains" {
                                     num = 12
                                 }
-                                if coolArray[index].lowercased() == "time" {
+                                if coolArray[index].lowercased() == "information" {
                                     num = 13
                                 }
-                                if coolArray[index].lowercased() == "need" {
+                                if coolArray[index].lowercased() == "knowledge" {
                                     num = 14
+                                }
+                                if coolArray[index].lowercased() == "time" {
+                                    num = 15
+                                }
+                                if coolArray[index].lowercased() == "need" {
+                                    num = 16
                                 }
                                 
                             }
                         }
                         if shakeCounter >= Int.random(in: 3...6) {
-                            num = 6
+                            num = Int.random(in: 0...1)
                             shakeCounter = 0
                         }
                     }
                 
-                Text(array[num] + " (\(String(shakeCounter)))")
+                Text(array[num]! + " (\(String(shakeCounter)))")
                     .padding(.horizontal)
                 //.fixedSize(horizontal: false, vertical: true)
                 
