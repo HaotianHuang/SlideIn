@@ -58,6 +58,18 @@ extension View {
 
 // An example view that responds to being shaken
 
+// MARK: Function for checking text equivalence
+
+func Check(_ txt: String, _ ref: String...) -> Bool {
+    
+    for item in ref {
+        if txt.lowercased() == item.lowercased() {
+            return true
+        }
+    }
+    return false
+}
+
 
 // MARK: Create resizeable text box
 
@@ -82,18 +94,19 @@ struct Home: View {
             7: "Be wary of pushing responsibilities over to strangers.",
             8: "If you want to ask for something, make your intentions clear from the start.",
             9: "Remember to respect them and to respect yourself.",
-            10: "Can you be more specific?🤔❗",
+            10: "Have you made your request specific?🤔",
             11: "Is this something you need their help with? Or can you figure it out on Google.",
             12: "🧠...CEOs and senior executives hate this question. They say it’s self-serving, wastes time, and isn’t reciprocal 😡",
             13: "They are almost everywhere! Now aren’t they?? Seek and thou shall find 🧐",
             14: "Knowledge is indeed everything, but with a little digging do you reckon you could find these elsewhere?⛏️👷",
             15: "Time is money, is it not? What do they really have to gain from providing you with guidance, what can you do to earn their time?? ⏰💰💸💰",
-            16: "No doubt you need it, but is there a better way of saying that ... I’m sure you’d be grateful for their help."
+            16: "No doubt you need it, but is there a better way of saying that ... I’m sure you’d be grateful for their help.",
+            17: "Is this something they are uniquely positioned to help you with or answer?"
         ]
     
     @State private var num = 0
     
-    @State var coolArray = ["..."]
+    @State var inputArray = ["..."]
     
     @State private var shakeCounter = 0
     
@@ -118,52 +131,55 @@ struct Home: View {
                             //                            }
                         }
                         if luckyChoice == 1{
-                            coolArray = text.components(separatedBy: " ")
-                            for index in 0..<coolArray.count {
-                                if coolArray[index].lowercased() == "hey" {
+                            inputArray = text.components(separatedBy: " ")
+                            for index in 0..<inputArray.count {
+                                if  Check(inputArray[index], "hey", "hello", "hi", "hii") {
                                     num = 2
                                 }
-                                if coolArray[index].lowercased() == "benefit" {
+                                if Check(inputArray[index], "can"){
                                     num = 3
                                 }
-                                if coolArray[index].lowercased() == "give" {
+                                if Check(inputArray[index], "give") {
                                     num = 4
                                 }
-                                if coolArray[index].lowercased() == "me" {
+                                if Check(inputArray[index], "me", "I"){
                                     num = 5
                                 }
-                                if coolArray[index].lowercased() == "chance" {
+                                if Check(inputArray[index], "chance", "possible", "possibly"){
                                     num = 6
                                 }
-                                if coolArray[index].lowercased() == "want" {
+                                if Check(inputArray[index], "want", "would like") {
                                     num = 7
                                 }
-                                if coolArray[index].lowercased() == "also" {
+                                if Check(inputArray[index], "also") {
                                     num = 8
                                 }
-                                if coolArray[index].lowercased() == "help" {
+                                if Check(inputArray[index], "help") {
                                     num = 9
                                 }
-                                if coolArray[index].lowercased() == "tips"{
+                                if Check(inputArray[index], "know"){
                                     num = 10
                                 }
-                                if coolArray[index].lowercased() == "could" {
+                                if Check(inputArray[index], "could") {
                                     num = 11
                                 }
-                                if coolArray[index].lowercased() == "brains" {
+                                if Check(inputArray[index], "brains", "brain") {
                                     num = 12
                                 }
-                                if coolArray[index].lowercased() == "information" {
+                                if Check(inputArray[index], "information") {
                                     num = 13
                                 }
-                                if coolArray[index].lowercased() == "knowledge" {
+                                if Check(inputArray[index], "knowledge"){
                                     num = 14
                                 }
-                                if coolArray[index].lowercased() == "time" {
+                                if Check(inputArray[index], "time") {
                                     num = 15
                                 }
-                                if coolArray[index].lowercased() == "need" {
+                                if Check(inputArray[index], "need"){
                                     num = 16
+                                }
+                                if Check(inputArray[index], "advice", "tips"){
+                                    num = 17
                                 }
                                 
                             }
