@@ -7,6 +7,8 @@
 //
 
 import SwiftUI
+import UIKit
+
 
 struct ContentView: View {
     var body: some View {
@@ -18,6 +20,18 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
+}
+
+// MARK: Vibration
+
+func simpleSuccess() {
+    let generator = UINotificationFeedbackGenerator()
+    generator.notificationOccurred(.success)
+}
+
+func simpleError() {
+    let generator = UINotificationFeedbackGenerator()
+    generator.notificationOccurred(.error)
 }
 
 // MARK: .onShake Creation
@@ -46,8 +60,10 @@ struct DeviceShakeViewModifier: ViewModifier {
             .onReceive(NotificationCenter.default.publisher(for: UIDevice.deviceDidShakeNotification)) { _ in
                 action()
             }
+        
     }
 }
+
 
 // A View extension to make the modifier easier to use.
 extension View {
@@ -64,6 +80,7 @@ func Check(_ txt: String, _ ref: String...) -> Bool {
     
     for item in ref {
         if txt.lowercased() == item.lowercased() {
+            simpleSuccess()
             return true
         }
     }
@@ -97,7 +114,7 @@ struct Home: View {
             10: "Have you made your request specific?🤔",
             11: "Is this something you need their help with? Or can you figure it out on Google.",
             12: "🧠...CEOs and senior executives hate this question. They say it’s self-serving, wastes time, and isn’t reciprocal 😡",
-            13: "They are almost everywhere! Now aren’t they?? Seek and thou shall find 🧐",
+            13: "Be cautious of offloading research you should be doing onto others.",
             14: "Knowledge is indeed everything, but with a little digging do you reckon you could find these elsewhere?⛏️👷",
             15: "Time is money, is it not? What do they really have to gain from providing you with guidance, what can you do to earn their time?? ⏰💰💸💰",
             16: "No doubt you need it, but is there a better way of saying that ... I’m sure you’d be grateful for their help.",
@@ -110,85 +127,97 @@ struct Home: View {
     
     @State private var shakeCounter = 0
     
-    
+
+
     // MARK: CONTENT VIEW
     var body: some View {
         NavigationView{
             VStack(spacing: 5) {
-                Text("Shake for wisdom 🥺")
-                    .foregroundColor(.blue)
-                    .bold()
-                    .onShake {
-                        shakeCounter += 1
-                        let luckyChoice = 1
-                        if luckyChoice == 0 {
-                            //                            let newNum = Int.random(in: 0...6)
-                            //                            if newNum != num {
-                            //                                num = newNum
-                            //                            }
-                            //                            if newNum == num {
-                            //                                num = Int.random(in: 0...6)
-                            //                            }
-                        }
-                        if luckyChoice == 1{
-                            inputArray = text.components(separatedBy: " ")
-                            for index in 0..<inputArray.count {
-                                if  Check(inputArray[index], "hey", "hello", "hi", "hii") {
-                                    num = 2
+
+                HStack{
+                    
+                    Button("Copy 🚀") {
+                        let string = text
+                        let pasteboard = UIPasteboard.general
+                        pasteboard.string = string
+                    }
+                    
+                    Text("Shake for wisdom 🥺")
+                        .foregroundColor(.blue)
+                        .bold()
+                        .onShake {
+                            shakeCounter += 1
+                            let luckyChoice = 1
+                            if luckyChoice == 0 {
+                                //                            let newNum = Int.random(in: 0...6)
+                                //                            if newNum != num {
+                                //                                num = newNum
+                                //                            }
+                                //                            if newNum == num {
+                                //                                num = Int.random(in: 0...6)
+                                //                            }
+                            }
+                            if luckyChoice == 1{
+                                inputArray = text.components(separatedBy: " ")
+                                for index in 0..<inputArray.count {
+                                    if  Check(inputArray[index], "hey", "hello", "hi", "hii") {
+                                        num = 2
+                                    }
+                                    if Check(inputArray[index], "can"){
+                                        num = 3
+                                    }
+                                    if Check(inputArray[index], "give") {
+                                        num = 4
+                                    }
+                                    if Check(inputArray[index], "me", "I", "my"){
+                                        num = 5
+                                    }
+                                    if Check(inputArray[index], "chance", "possible", "possibly"){
+                                        num = 6
+                                    }
+                                    if Check(inputArray[index], "want", "would like") {
+                                        num = 7
+                                    }
+                                    if Check(inputArray[index], "also") {
+                                        num = 8
+                                    }
+                                    if Check(inputArray[index], "help") {
+                                        num = 9
+                                    }
+                                    if Check(inputArray[index], "know"){
+                                        num = 10
+                                    }
+                                    if Check(inputArray[index], "could") {
+                                        num = 11
+                                    }
+                                    if Check(inputArray[index], "brains", "brain") {
+                                        num = 12
+                                    }
+                                    if Check(inputArray[index], "information") {
+                                        num = 13
+                                    }
+                                    if Check(inputArray[index], "knowledge"){
+                                        num = 14
+                                    }
+                                    if Check(inputArray[index], "time") {
+                                        num = 15
+                                    }
+                                    if Check(inputArray[index], "need"){
+                                        num = 16
+                                    }
+                                    if Check(inputArray[index], "advice", "tips"){
+                                        num = 17
+                                    }
+                                    
                                 }
-                                if Check(inputArray[index], "can"){
-                                    num = 3
-                                }
-                                if Check(inputArray[index], "give") {
-                                    num = 4
-                                }
-                                if Check(inputArray[index], "me", "I"){
-                                    num = 5
-                                }
-                                if Check(inputArray[index], "chance", "possible", "possibly"){
-                                    num = 6
-                                }
-                                if Check(inputArray[index], "want", "would like") {
-                                    num = 7
-                                }
-                                if Check(inputArray[index], "also") {
-                                    num = 8
-                                }
-                                if Check(inputArray[index], "help") {
-                                    num = 9
-                                }
-                                if Check(inputArray[index], "know"){
-                                    num = 10
-                                }
-                                if Check(inputArray[index], "could") {
-                                    num = 11
-                                }
-                                if Check(inputArray[index], "brains", "brain") {
-                                    num = 12
-                                }
-                                if Check(inputArray[index], "information") {
-                                    num = 13
-                                }
-                                if Check(inputArray[index], "knowledge"){
-                                    num = 14
-                                }
-                                if Check(inputArray[index], "time") {
-                                    num = 15
-                                }
-                                if Check(inputArray[index], "need"){
-                                    num = 16
-                                }
-                                if Check(inputArray[index], "advice", "tips"){
-                                    num = 17
-                                }
-                                
+                            }
+                            if shakeCounter >= Int.random(in: 3...6) {
+                                num = Int.random(in: 0...1)
+                                shakeCounter = 0
                             }
                         }
-                        if shakeCounter >= Int.random(in: 3...6) {
-                            num = Int.random(in: 0...1)
-                            shakeCounter = 0
-                        }
-                    }
+                    
+                }
                 
                 Text(array[num]! + " (\(String(shakeCounter)))")
                     .padding(.horizontal)
@@ -196,6 +225,8 @@ struct Home: View {
                 
                 //Text(array[num])
                 //.padding(.horizontal)
+                
+                
                 
                 AutoSizingTF(hint: "Enter Message", text: $text, containerHeight: $containerHeight, onEnd: {
                     
@@ -210,7 +241,7 @@ struct Home: View {
                 //.background(Color.white)
                 .cornerRadius(10)
                 .padding()
-                
+        
                 
             }
             
@@ -275,6 +306,8 @@ struct AutoSizingTF: UIViewRepresentable {
         }
     }
 }
+
+
 
 
 class Coordinator: NSObject, UITextViewDelegate{
