@@ -17,6 +17,10 @@ struct Drafting: View {
         NavigationView{
             VStack(spacing: 5){
                 Text(template.title)
+                    .font(.title)
+                Divider()
+                    .frame(height: 20)
+                    .padding(.horizontal, 20)
                 TextBox(templateText: template.content)
                 Spacer()
             }

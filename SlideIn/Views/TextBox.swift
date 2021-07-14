@@ -18,6 +18,8 @@ struct TextBox: View {
     var templateText: String
     
     var body: some View {
+        
+        AdviceView(text: inputText)
 
         AutoSizingTF(templateText: templateText, hint: "Reveal template", text: $inputText, containerHeight: $containerHeight, onEnd: {
             // Do when keyboard closes...
@@ -27,6 +29,22 @@ struct TextBox: View {
         .frame(height: containerHeight <= 400 ? containerHeight : 400)
         .cornerRadius(10)
         .padding()
+        
+        ZStack{
+            Rectangle()
+                .frame(height: 50)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+                .shadow(color: .gray, radius: 2, x: -2, y: 2)
+                .padding()
+            Button("Copy to Clipboard 📋"){
+                Functions.Copy(inputText)
+            }
+            .padding()
+        }
+   
+        
+        
     }
 }
 

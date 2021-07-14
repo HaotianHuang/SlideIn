@@ -1,15 +1,14 @@
-[
-    {
-    "id": 0,
-    "title": " ♾️ Blank Page",
-    "features": ["Shoot your shot", "Reach out"],
-    "content": ""
+[{
+        "id": 0,
+        "title": " ♾️ Blank Page",
+        "features": ["Shoot your shot", "Reach out"],
+        "content": ""
     },
     {
-    "id": 1,
-    "title": " ☕ Coffee meetup request",
-    "features": ["Simple", "Career questions", "Mentoring"],
-    "content": "Simple greeting.\n\nIntroduce parts of your background that are relevant.\n\nTransition into how you found out about them and why you have reached out.\n\nFinish with a low-commitment request for a 15-minute phone chat"
+        "id": 1,
+        "title": " ☕ Coffee meetup request",
+        "features": ["Simple", "Career questions", "Mentoring"],
+        "content": "Simple greeting.\n\nIntroduce parts of your background that are relevant.\n\nTransition into how you found out about them and why you have reached out.\n\nFinish with a low-commitment request for a 15-minute phone chat"
     },
     {
         "id": 2,
