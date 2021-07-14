@@ -13,7 +13,7 @@ struct TextBox: View {
     
     @State var inputText = ""
     
-    @State var containerHeight: CGFloat = 400
+    @State var containerHeight: CGFloat = 275
     
     var templateText: String
     
@@ -26,7 +26,7 @@ struct TextBox: View {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         })
         // Max height here...
-        .frame(height: containerHeight <= 400 ? containerHeight : 400)
+        .frame(height: containerHeight <= 275 ? containerHeight : 275)
         .cornerRadius(10)
         .padding()
         

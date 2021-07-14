@@ -26,6 +26,18 @@ struct Functions {
         pasteboard.string = string
     }
     
+    // MARK: Vibration
+
+    static func simpleSuccess() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+    }
+
+    static func simpleError() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.error)
+    }
+    
 }
 
 

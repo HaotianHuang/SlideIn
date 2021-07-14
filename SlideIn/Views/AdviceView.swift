@@ -34,6 +34,8 @@ struct AdviceView: View {
     
     @State private var num = 0
     
+    @State private var numArray:[Int] = []
+    
     @State var inputArray = ["..."]
     
     var text: String
@@ -43,57 +45,60 @@ struct AdviceView: View {
             Text("🔮: " + array[num]!)
                 .padding(.horizontal, 10)
                 .onShake {
+                        numArray = []
                         inputArray = text.components(separatedBy: " ")
                         for index in 0..<inputArray.count {
                             if  Functions.Check(inputArray[index], "hey", "hello", "hi", "hii") {
-                                num = 2
+                                numArray.append(2)
                             }
                             if Functions.Check(inputArray[index], "can"){
-                                num = 3
+                                numArray.append(3)
                             }
                             if Functions.Check(inputArray[index], "give") {
-                                num = 4
+                                numArray.append(4)
                             }
                             if Functions.Check(inputArray[index], "me", "I", "my"){
-                                num = 5
+                                numArray.append(5)
                             }
                             if Functions.Check(inputArray[index], "chance", "possible", "possibly"){
-                                num = 6
+                                numArray.append(6)
                             }
                             if Functions.Check(inputArray[index], "want", "would like") {
-                                num = 7
+                                numArray.append(7)
                             }
                             if Functions.Check(inputArray[index], "also") {
-                                num = 8
+                                numArray.append(8)
                             }
                             if Functions.Check(inputArray[index], "help") {
-                                num = 9
+                                numArray.append(9)
                             }
                             if Functions.Check(inputArray[index], "know"){
-                                num = 10
+                                numArray.append(10)
                             }
                             if Functions.Check(inputArray[index], "could") {
-                                num = 11
+                                numArray.append(11)
                             }
                             if Functions.Check(inputArray[index], "brains", "brain") {
-                                num = 12
+                                numArray.append(12)
                             }
                             if Functions.Check(inputArray[index], "information") {
-                                num = 13
+                                numArray.append(13)
                             }
                             if Functions.Check(inputArray[index], "knowledge"){
-                                num = 14
+                                numArray.append(14)
                             }
                             if Functions.Check(inputArray[index], "time") {
-                                num = 15
+                                numArray.append(15)
                             }
                             if Functions.Check(inputArray[index], "need"){
-                                num = 16
+                                numArray.append(16)
                             }
                             if Functions.Check(inputArray[index], "advice", "tips"){
-                                num = 17
+                                numArray.append(17)
                             }
                         }
+                        num = numArray.randomElement() ?? 0
+                        Functions.simpleSuccess()
                     }
                 
         }
