@@ -11,7 +11,8 @@ import SwiftUI
 struct SlideInApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
+                .environmentObject(TemplateModel())
         }
     }
 }

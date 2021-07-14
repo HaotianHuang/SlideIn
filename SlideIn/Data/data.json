@@ -1,0 +1,20 @@
+[
+    {
+    "id": 0,
+    "title": " ♾️ Blank Page",
+    "features": ["Shoot your shot", "Reach out"],
+    "content": ""
+    },
+    {
+    "id": 1,
+    "title": " ☕ Coffee meetup request",
+    "features": ["Simple", "Career questions", "Mentoring"],
+    "content": "Simple greeting.\n\nIntroduce parts of your background that are relevant.\n\nTransition into how you found out about them and why you have reached out.\n\nFinish with a low-commitment request for a 15-minute phone chat"
+    },
+    {
+        "id": 2,
+        "title": "💼 Work Experience",
+        "features": ["Effective", "Value focused", "Get opportunities"],
+        "content": "Simple greeting.\n\nIntroduce your specific admiration for the work they do.\n\n Transition into your reason for writing.\n\n Acknowledge that you need to make it worthwhile for them.\n\n Propose a specific project you could feasibly tackle for them during your stay and why it would be useful for them (this is important).\n\n Provide examples of previous projects you've undertaken.\n\n Let them know when you need an answer and how they can contact you."
+    }
+]
